@@ -29,9 +29,10 @@ jenkins:
       enableCaptcha: false
       users:
       - id: "admin"
+        password: "admin"
         name: "admin"
         properties:
-        - "myView"
+        #- "myView"
         - preferredProvider:
             providerId: "default"
         - "timezone"
