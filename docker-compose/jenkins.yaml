@@ -1,3 +1,14 @@
+credentials:
+  system:
+    domainCredentials:
+    - credentials:
+      - basicSSHUserPrivateKey:
+          id: "ssh_private_key_node1"
+          privateKeySource:
+            directEntry:
+              privateKey: "${jenkins_private}"
+          scope: SYSTEM
+          username: "jenkins"
 jenkins:
   agentProtocols:
   - "JNLP4-connect"
@@ -14,7 +25,22 @@ jenkins:
   markupFormatter: "plainText"
   mode: NORMAL
   myViewsTabBar: "standard"
-  numExecutors: 2
+  nodes:
+  - permanent:
+      labelString: "whatever"
+      launcher:
+        ssh:
+          credentialsId: "ssh_private_key_node1"
+          host: "jeanquin_node1"
+          port: 22
+          sshHostKeyVerificationStrategy:
+            manuallyTrustedKeyVerificationStrategy:
+              requireInitialManualTrust: false
+      mode: EXCLUSIVE
+      name: "jeanquin_node1"
+      remoteFS: "/home/jenkins"
+      retentionStrategy: "always"
+  numExecutors: 0
   primaryView:
     all:
       name: "all"
